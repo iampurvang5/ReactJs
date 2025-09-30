@@ -6,7 +6,8 @@ import SliderComponent from '../components/SliderComponent';
 import SliderComponentCode from '../components/SliderComponent.jsx?raw ';
 import DataTable from '../components/DataTable';
 import DataTableCode from '../components/DataTable.jsx?raw';
-
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const ComponentDetail = () => {
   const { id } = useParams();
@@ -48,7 +49,14 @@ const ComponentDetail = () => {
   const handleCopy = () => {
     if (selectedComponent.code) {
       navigator.clipboard.writeText(selectedComponent.code);
-      alert('Code copied to clipboard!'); // Or use a toast notification for better UX
+       Swal.fire({
+                  icon: "success",
+                  title: "Copied!",
+                  text: "Code copied to clipboard!",
+                  timer: 1000,
+                  showConfirmButton: false
+                });
+      // alert('Code copied to clipboard!'); // Or use a toast notification for better UX
     }
   };
 
