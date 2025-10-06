@@ -41,7 +41,7 @@ const SliderComponent = ({isDetailPage}) => {
           <img src="https://t4.ftcdn.net/jpg/02/56/10/07/360_F_256100731_qNLp6MQ3FjYtA3Freu9epjhsAj2cwU9c.jpg" alt="Slide 1" className={`w-full object-cover rounded-lg shadow-md ${isDetailPage ? 'h-64' : 'h-26'}`} />
         </div>
         <div className='mr-2 p-2'>
-          <img src="https://png.pngtree.com/thumb_back/fh260/background/20240522/pngtree-abstract-cloudy-background-beautiful-natural-streaks-of-sky-and-clouds-red-image_15684333.jpg" alt="Slide 1" className={`w-full object-cover rounded-lg shadow-md ${isDetailPage ? 'h-64' : 'h-26'}`} />
+          <img src="https://img.freepik.com/free-photo/beautiful-lake-mountains_395237-44.jpg?semt=ais_hybrid&w=740&q=80" alt="Slide 1" className={`w-full object-cover rounded-lg shadow-md ${isDetailPage ? 'h-64' : 'h-26'}`} />
         </div>
       </Slider>
     </div>

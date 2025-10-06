@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import Counter from '../components/Counter'; // Adjust path based on your project structure
 import SliderComponent from '../components/SliderComponent';
 import DataTable from '../components/DataTable';
+import ProgressBar from '../components/ProgressBar';
+import SidebarComponent from '../components/SidebarComponent';
+import PhotoGallery from '../components/PhotoGallery';
+import Dashboard from '../components/Dashboard';
 
 const ComponentsPage = () => {
   // Placeholder data for cards; you can add more or modify later
@@ -27,21 +31,21 @@ const ComponentsPage = () => {
     },
     {
       id: 4,
-      title: "Component 4",
-      description: "Placeholder for future component",
-      component: null,
+      title: "Dynamic Progree Bar",
+      description: "Dynamic progress bar with steps",
+      component: <ProgressBar />,
     },
     {
       id: 5,
-      title: "Component 5",
-      description: "Placeholder for future component",
-      component: null,
+      title: "Photo Gallery",
+      description: "Photo gallery with local upload and URL addition features",
+      component: <PhotoGallery/>,
     },
     {
       id: 6,
-      title: "Component 6",
-      description: "Placeholder for future component",
-      component: null,
+      title: "Dashboard",
+      description: "Dashboards components with multiple chart options",
+      component: <Dashboard/>,
     },
     {
       id: 7,
@@ -103,11 +107,7 @@ const ComponentsPage = () => {
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayedCards.map((card) => (
-          <Link
-            to={`/components/${card.id}`}
-            key={card.id}
-            className="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow hover:bg-gray-50"
-          >
+          <Link to={`/components/${card.id}`} key={card.id} className="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow hover:bg-gray-50">
             <h2 className="text-xl font-semibold mb-2">{card.title}</h2>
             <p className="text-gray-600 mb-4">{card.description}</p>
             {card.component ? (

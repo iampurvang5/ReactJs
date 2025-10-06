@@ -1,4 +1,8 @@
 import React, { useState, useMemo } from 'react';
+import { HiChevronLeft } from "react-icons/hi";
+import { HiChevronRight } from "react-icons/hi";
+import { HiChevronDoubleRight } from "react-icons/hi";
+import { HiChevronDoubleLeft } from "react-icons/hi";
 
 const DataTable = ({ isDetailPage = false }) => {
   // Static sample data - you can replace with your own data
@@ -64,11 +68,12 @@ const DataTable = ({ isDetailPage = false }) => {
     { key: 'age', label: 'Age', sortable: true },
     { key: 'city', label: 'City', sortable: true },
     { key: 'department', label: 'Department', sortable: true },
-    { key: 'salary', label: 'Salary', sortable: true, formatter: (value) => `$${value.toLocaleString()}` },
+    { key: 'salary', label: 'Salary', sortable: true, formatter: (value) => `$${value.toLocaleString()}`  },//formatter: (value) => `$${value.toLocaleString()}` 
   ];
 
   // Handle sorting
   const handleSort = (key) => {
+    
     if (!key.sortable) return;
     setSortConfig((prevConfig) => {
       if (prevConfig.key !== key.key) {
@@ -111,7 +116,8 @@ const DataTable = ({ isDetailPage = false }) => {
       headers,
       ...sortedData.map(row => 
         columns.map(col => 
-          col.formatter ? col.formatter(row[col.key]) : row[col.key]
+        //   col.formatter ? col.formatter(row[col.key]) : 
+          row[col.key]
         ).join(',')
       )
     ].join('\n');
@@ -153,6 +159,7 @@ const DataTable = ({ isDetailPage = false }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <span>Download Excel</span>
+            -
           </button>
         </div>
       )}
@@ -230,14 +237,15 @@ const DataTable = ({ isDetailPage = false }) => {
               disabled={currentPage === 1}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
             >
-              First
+              <HiChevronDoubleLeft />
             </button>
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
             >
-              Previous
+             <HiChevronLeft />
+
             </button>
             <div className="flex space-x-1">
               {getPageNumbers().map((page) => (
@@ -259,14 +267,14 @@ const DataTable = ({ isDetailPage = false }) => {
               disabled={currentPage === totalPages}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
             >
-              Next
+              <HiChevronRight />
             </button>
             <button
               onClick={() => handlePageChange(totalPages)}
               disabled={currentPage === totalPages}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
             >
-              Last
+              <HiChevronDoubleRight />
             </button>
           </div>
         </div>

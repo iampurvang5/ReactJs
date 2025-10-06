@@ -8,6 +8,14 @@ import DataTable from '../components/DataTable';
 import DataTableCode from '../components/DataTable.jsx?raw';
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import ProgressBar from '../components/ProgressBar';
+import ProgressBarCode from '../components/ProgressBar.jsx?raw';
+import SidebarComponent from '../components/SidebarComponent';
+import PhotoGallery from '../components/PhotoGallery';
+import PhotoGalleryCode from '../components/PhotoGallery.jsx?raw';
+import Dashboard from '../components/Dashboard';
+import DashboardCode from '../components/Dashboard.jsx?raw';
+import { HiArrowCircleLeft } from "react-icons/hi";
 
 const ComponentDetail = () => {
   const { id } = useParams();
@@ -23,9 +31,21 @@ const ComponentDetail = () => {
     },
     { id: 2, title: 'Slider Component', description: 'Slider Component Using Slick slider library', component: <SliderComponent isDetailPage={true}/>, code: SliderComponentCode },
     { id: 3, title: 'DataTable Component', description: 'Data table with sorting and pagination and search functionality', component: <DataTable isDetailPage={true}/>, code: DataTableCode },
-    { id: 4, title: 'Component 4', description: 'Placeholder for future component', component: null, code: null },
-    { id: 5, title: 'Component 5', description: 'Placeholder for future component', component: null, code: null },
-    { id: 6, title: 'Component 6', description: 'Placeholder for future component', component: null, code: null },
+    { id: 4, title: 'Dynamic Progree Bar', description: 'Dynamic progress bar with steps', component: <ProgressBar isDetailPage={true}/>, code: ProgressBarCode },
+    {
+      id: 5,
+      title: "Photo Gallery",
+      description: "Photo gallery with local upload and URL addition features",
+      component: <PhotoGallery isDetailPage={true}/>,
+      code: PhotoGalleryCode
+    },
+    {
+      id: 6,
+      title: "Dashboard",
+      description: "Dashboards components with multiple chart options",
+      component: <Dashboard isDetailPage={true}/>,
+      code: DashboardCode
+    },
     { id: 7, title: 'Component 7', description: 'Placeholder for future component', component: null, code: null },
     { id: 8, title: 'Component 8', description: 'Placeholder for future component', component: null, code: null },
     { id: 9, title: 'Component 9', description: 'Placeholder for future component', component: null, code: null },
@@ -49,20 +69,22 @@ const ComponentDetail = () => {
   const handleCopy = () => {
     if (selectedComponent.code) {
       navigator.clipboard.writeText(selectedComponent.code);
-       Swal.fire({
-                  icon: "success",
-                  title: "Copied!",
-                  text: "Code copied to clipboard!",
-                  timer: 1000,
-                  showConfirmButton: false
-                });
-      // alert('Code copied to clipboard!'); // Or use a toast notification for better UX
+      Swal.fire({
+      icon: "success",
+      title: "Copied!",
+      text: "Code copied to clipboard!",
+      timer: 1000,
+      showConfirmButton: false
+    });
     }
   };
 
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Link to="/components" className="mt-6 inline-block text-blue-500 hover:underline text-2xl">
+            <HiArrowCircleLeft />
+      </Link>
       <h1 className="text-3xl font-bold mb-4">{selectedComponent.title}</h1>
       <p className="text-lg mb-6">{selectedComponent.description}</p>
       <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6">
@@ -90,9 +112,7 @@ const ComponentDetail = () => {
       ) : (
         <p className="mt-8 text-lg text-gray-600">No source code available for this component yet.</p>
       )}
-      <Link to="/components" className="mt-6 inline-block text-blue-500 hover:underline">
-        Back to Components
-      </Link>
+      
     </div>
   );
 };
