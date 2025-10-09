@@ -9,8 +9,11 @@ import PhotoGallery from '../components/PhotoGallery';
 import Dashboard from '../components/Dashboard';
 import Chatbot from '../components/Chatbot';
 import ClockComponent from '../components/ClockComponent';
-
+import { useSelector } from 'react-redux';
+import { HiChevronLeft } from "react-icons/hi"; //npm install react-icons
+import { HiChevronRight } from "react-icons/hi";
 const ComponentsPage = () => {
+  const theme = useSelector((state) => state.theme.mode);
   // Placeholder data for cards; you can add more or modify later
   const cards = [
     {
@@ -103,20 +106,20 @@ const ComponentsPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Components Showcase</h1>
-      <p className="text-lg mb-6">
+      <h1 className={`text-3xl font-bold mb-4 ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>Components Showcase</h1>
+      <p className={`text-lg mb-6 ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>
         Click a card to view the component in detail.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayedCards.map((card) => (
-          <Link to={`/components/${card.id}`} key={card.id} className="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow hover:bg-gray-50">
-            <h2 className="text-xl font-semibold mb-2">{card.title}</h2>
-            <p className="text-gray-600 mb-4">{card.description}</p>
+          <Link to={`/components/${card.id}`} key={card.id} className={`${theme==='dark'?'bg-gray-700 border border-gray-600 hover:bg-gray-900':'bg-white border border-gray-200 hover:bg-gray-50'} rounded-lg shadow-md p-6 hover:shadow-lg transition duration-1000 ease-in-out`}>
+            <h2 className={`text-xl font-semibold mb-2 ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>{card.title}</h2>
+            <p className={`mb-4 ${theme==='dark'?'text-gray-100':'text-gray-600'}`}>{card.description}</p>
             {card.component ? (
               <div className="h-48">{card.component}</div>
             ) : (
-              <div className="h-48 bg-gray-100 flex items-center justify-center rounded">
-                <span className="text-gray-500">Component goes here</span>
+              <div className={`h-48 flex items-center justify-center rounded ${theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' : 'bg-gray-100 text-gray-800'}`}>
+                <span>Component goes here</span>
               </div>
             )}
           </Link>
@@ -128,19 +131,19 @@ const ComponentsPage = () => {
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-500 disabled:bg-gray-300 transition"
+            className={`${theme==='dark'? 'bg-gray-700 text-white hover:bg-gray-900 disabled:text-gray-900 disabled:bg-gray-600':'bg-gray-800 text-white hover:bg-gray-900 disabled:bg-gray-300'} px-4 py-2  rounded transition`}
           >
-            Previous
+            <HiChevronLeft size={20}/>
           </button>
-          <span className="text-lg">
+          <span className={`text-lg ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-500 disabled:bg-gray-300 transition"
+            className={`${theme==='dark'? 'bg-gray-700 text-white hover:bg-gray-900 disabled:text-gray-900 disabled:bg-gray-600':'bg-gray-800 text-white hover:bg-gray-900 disabled:bg-gray-300'} px-4 py-2 rounded transition`}
           >
-            Next
+            <HiChevronRight size={20}/>
           </button>
         </div>
       )}

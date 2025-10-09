@@ -22,107 +22,110 @@ import Chatbot from '../components/Chatbot';
 import ChatbotCode from '../components/Chatbot.jsx?raw';
 import ClockComponent from '../components/ClockComponent';
 import ClockComponentCode from '../components/ClockComponent.jsx?raw';
+import { useSelector } from 'react-redux';
+
 const ComponentDetail = () => {
-  const { id } = useParams();
+	const { id } = useParams();
+	const theme = useSelector((state) => state.theme.mode);
 
-  // Define components data (same as in ComponentsPage for consistency)
-  const components = [
-    { 
-      id: 1, 
-      title: 'Counter Component', 
-      description: 'A simple counter with increment and decrement buttons', 
-      component: <Counter isDetailPage={true} />,
-      code: CounterCode
-    },
-    { id: 2, title: 'Slider Component', description: 'Slider Component Using Slick slider library', component: <SliderComponent isDetailPage={true}/>, code: SliderComponentCode },
-    { id: 3, title: 'DataTable Component', description: 'Data table with sorting and pagination and search functionality', component: <DataTable isDetailPage={true}/>, code: DataTableCode },
-    { id: 4, title: 'Dynamic Progree Bar', description: 'Dynamic progress bar with steps', component: <ProgressBar isDetailPage={true}/>, code: ProgressBarCode },
-    {
-      id: 5,
-      title: "Photo Gallery",
-      description: "Photo gallery with local upload and URL addition features",
-      component: <PhotoGallery isDetailPage={true}/>,
-      code: PhotoGalleryCode
-    },
-    {
-      id: 6,
-      title: "Dashboard",
-      description: "Dashboards components with multiple chart options",
-      component: <Dashboard isDetailPage={true}/>,
-      code: DashboardCode
-    },
-    { id: 7, title: 'ChatBot', description: 'chatbot component with basic interation', component: <Chatbot isDetailPage={true}/>, code: ChatbotCode },
-    { id: 8, title: 'Clock Component', description: 'A simple digital clock displaying current time', component: <ClockComponent isDetailPage={true}/>, code: ClockComponentCode },
-    { id: 9, title: 'Component 9', description: 'Placeholder for future component', component: null, code: null },
-  ];
+	// Define components data (same as in ComponentsPage for consistency)
+	const components = [
+	{ 
+		id: 1, 
+		title: 'Counter Component', 
+		description: 'A simple counter with increment and decrement buttons', 
+		component: <Counter isDetailPage={true} />,
+		code: CounterCode
+	},
+	{ id: 2, title: 'Slider Component', description: 'Slider Component Using Slick slider library', component: <SliderComponent isDetailPage={true}/>, code: SliderComponentCode },
+	{ id: 3, title: 'DataTable Component', description: 'Data table with sorting and pagination and search functionality', component: <DataTable isDetailPage={true}/>, code: DataTableCode },
+	{ id: 4, title: 'Dynamic Progree Bar', description: 'Dynamic progress bar with steps', component: <ProgressBar isDetailPage={true}/>, code: ProgressBarCode },
+	{
+		id: 5,
+		title: "Photo Gallery",
+		description: "Photo gallery with local upload and URL addition features",
+		component: <PhotoGallery isDetailPage={true}/>,
+		code: PhotoGalleryCode
+	},
+	{
+		id: 6,
+		title: "Dashboard",
+		description: "Dashboards components with multiple chart options",
+		component: <Dashboard isDetailPage={true}/>,
+		code: DashboardCode
+	},
+	{ id: 7, title: 'ChatBot', description: 'chatbot component with basic interation', component: <Chatbot isDetailPage={true}/>, code: ChatbotCode },
+	{ id: 8, title: 'Clock Component', description: 'A simple digital clock displaying current time', component: <ClockComponent isDetailPage={true}/>, code: ClockComponentCode },
+	{ id: 9, title: 'Component 9', description: 'Placeholder for future component', component: null, code: null },
+	];
 
-  // Find the selected component
-  const selectedComponent = components.find((comp) => comp.id === parseInt(id));
+	// Find the selected component
+	const selectedComponent = components.find((comp) => comp.id === parseInt(id));
 
-  if (!selectedComponent) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Component Not Found</h1>
-        <p className="text-lg mb-6">The component you are looking for does not exist.</p>
-        <Link to="/components" className="text-blue-500 hover:underline">
-          Back to Components
-        </Link>
-      </div>
-    );
-  }
+	if (!selectedComponent) {
+	return (
+		<div className="container mx-auto px-4 py-8">
+		<h1 className="text-3xl font-bold mb-4">Component Not Found</h1>
+		<p className="text-lg mb-6">The component you are looking for does not exist.</p>
+		<Link to="/components" className="text-blue-500 hover:underline">
+			Back to Components
+		</Link>
+		</div>
+	);
+	}
 
-  const handleCopy = () => {
-    if (selectedComponent.code) {
-      navigator.clipboard.writeText(selectedComponent.code);
-      Swal.fire({
-      icon: "success",
-      title: "Copied!",
-      text: "Code copied to clipboard!",
-      timer: 1000,
-      showConfirmButton: false
-    });
-    }
-  };
+	const handleCopy = () => {
+	if (selectedComponent.code) {
+		navigator.clipboard.writeText(selectedComponent.code);
+		Swal.fire({
+		icon: "success",
+		title: "Copied!",
+		text: "Code copied to clipboard!",
+		timer: 1000,
+		showConfirmButton: false
+	});
+	}
+	};
 
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <Link to="/components" className="mt-6 inline-block text-blue-500 hover:underline text-2xl">
-            <HiArrowCircleLeft />
-      </Link>
-      <h1 className="text-3xl font-bold mb-4">{selectedComponent.title}</h1>
-      <p className="text-lg mb-6">{selectedComponent.description}</p>
-      <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6">
-        {selectedComponent.component ? (
-          <div className="min-h-[400px]">{selectedComponent.component}</div>
-        ) : (
-          <div className="min-h-[400px] bg-gray-100 flex items-center justify-center rounded">
-            <span className="text-gray-500">Component goes here</span>
-          </div>
-        )}
-      </div>
-      {selectedComponent.code ? (
-        <>
-          <h2 className="text-2xl font-bold mt-8 mb-4">Source Code</h2>
-          <div className="relative bg-gray-800 text-white p-4 rounded-lg overflow-auto max-h-[600px] scrollbar-hide">
-            {/* <pre><code>{selectedComponent.code}</code></pre> */}
-            <SyntaxHighlighter language="javascript" style={okaidia} customStyle={{ margin: 0, padding: '1rem', backgroundColor: 'transparent' }}>
-              {selectedComponent.code}
-            </SyntaxHighlighter>
-            <button
-              onClick={handleCopy}
-              className="absolute top-2 right-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-            >
-              Copy
-            </button>
-          </div>
-        </>
-      ) : (
-        <p className="mt-8 text-lg text-gray-600">No source code available for this component yet.</p>
-      )}
-      
-    </div>
-  );
+	return (
+	<div className="container mx-auto px-4 py-8">
+		<Link to="/components" className="mt-6 inline-block text-blue-500 hover:underline text-2xl">
+			<HiArrowCircleLeft />
+		</Link>
+		<h1 className={`text-3xl font-bold mb-4 ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>{selectedComponent.title}</h1>
+		<p className={`text-lg mb-6 ${theme==='dark'?'text-gray-100':'text-gray-600'}`}>{selectedComponent.description}</p>
+		<div className={`${theme==='dark'?'bg-gray-700 border border-gray-600':'bg-white border border-gray-200'}  rounded-lg shadow-md p-6`}>
+		{selectedComponent.component ? (
+			<div className="min-h-[400px]">{selectedComponent.component}</div>
+		) : (
+			<div className={`min-h-[400px] bg-gray-100 flex items-center justify-center rounded ${theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' : 'bg-gray-100 text-gray-800'}`}>
+			<span>Component goes here</span>
+			</div>
+		)}
+		</div>
+		{selectedComponent.code ? (
+		<>
+			<h2 className={`text-2xl font-bold mt-8 mb-4 ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>Source Code</h2>
+			<div className={`relative ${theme==='dark'?'bg-gray-700 border border-gray-600':'bg-gray-800 border border-gray-200'} text-white p-4 rounded-lg overflow-auto max-h-[600px] scrollbar-hide`}>
+			{/* <pre><code>{selectedComponent.code}</code></pre> */}
+			<SyntaxHighlighter language="javascript" style={okaidia} customStyle={{ margin: 0, padding: '1rem', backgroundColor: 'transparent' }}>
+				{selectedComponent.code}
+			</SyntaxHighlighter>
+			<button
+				onClick={handleCopy}
+				className="absolute top-2 right-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+			>
+				Copy
+			</button>
+			</div>
+		</>
+		) : (
+		<p className="mt-8 text-lg text-gray-600 ">No source code available for this component yet.</p>
+		)}
+		
+	</div>
+	);
 };
 
 export default ComponentDetail;

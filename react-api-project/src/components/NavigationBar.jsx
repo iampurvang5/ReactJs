@@ -1,11 +1,16 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; //npm install react-router-dom
 import { AuthContext } from "../context/AuthContext"; 
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from '../store/themeSlice';
+import {MdLightMode, MdDarkMode } from "react-icons/md";
 
 export default function Navbar() {
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.mode);
 
   const handleLogout = () => {
     setUser(null); // Clear user state
@@ -16,25 +21,23 @@ export default function Navbar() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
+  };
   // Default placeholder image for missing or invalid profile picture
   const placeholderImage = "https://via.placeholder.com/32?text=User";
 
   return (
-    <nav className="bg-gray-800 text-white px-6 py-3 flex items-center justify-between shadow-md">
-      {/* Left side - Logo / Brand */}
+    <nav className={`sticky top-0 z-50 bg-${theme === 'dark' ? 'gray-700' : 'gray-800'} text-${theme === 'dark' ? 'white' : 'white'} px-6 py-3 flex items-center justify-between shadow-md`}>
       <div className="text-xl font-bold">React App</div>
-
-      {/* Center - Links */}
       <div className="space-x-6 hidden md:flex">
-        <Link to="/" className="text-white hover:text-indigo-200 transition-colors">
+        <Link to="/" className={`text-${theme === 'dark' ? 'white' : 'white'} hover:text-${theme === 'dark' ? 'indigo-200' : 'indigo-600'} transition-colors`}>
           Home
         </Link>
-        <Link to="/components" className="text-white hover:text-indigo-200 transition-colors">
+        <Link to="/components" className={`text-${theme === 'dark' ? 'white' : 'white'} hover:text-${theme === 'dark' ? 'indigo-200' : 'indigo-600'} transition-colors`}>
           Components
         </Link>
       </div>
-
-      {/* Right side - Profile or Login/Register */}
       <div className="flex items-center space-x-4">
         {user ? (
           <div className="relative">
@@ -101,14 +104,21 @@ export default function Navbar() {
           </div>
         ) : (
           <>
-            <Link to="/login" className="text-white hover:text-indigo-200 transition-colors">
+            <Link to="/login" className={`text-${theme === 'dark' ? 'white' : 'white'} hover:text-${theme === 'dark' ? 'indigo-200' : 'indigo-600'} transition-colors`}>
               Login
             </Link>
-            <Link to="/register" className="text-white hover:text-indigo-200 transition-colors">
+            <Link to="/register" className={`text-${theme === 'dark' ? 'white' : 'white'} hover:text-${theme === 'dark' ? 'indigo-200' : 'indigo-600'} transition-colors`}>
               Register
             </Link>
           </>
         )}
+        <button
+          onClick={handleThemeToggle}
+          className={`px-4 py-2 rounded-full ${theme === 'dark' ? 'bg-yellow-400 text-gray-900' : 'bg-gray-700 text-white'} hover:opacity-90 transition duration-300`}
+        >
+          {theme === 'dark' ? <MdLightMode color={'#364153'}/> : <MdDarkMode />
+}
+        </button>
       </div>
     </nav>
   );

@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './store/store';
+import { useSelector } from 'react-redux';
 import NavigationBar from "./components/NavigationBar";
 import Footer from "./components/Footer";
 import CrudTable from "./components/CrudTable";
@@ -40,13 +43,16 @@ function App() {
 
   // Mock authentication state (replace with your auth logic, e.g., JWT or API call)
   const [user, setUser] = useState(null); // Set to user object when logged in, null when logged out
-
+    const theme = useSelector((state) => state.theme.mode);
+  
   return (
     <AuthContext.Provider value={{ user, setUser }}>
+    {/* // <Provider store={store}> */}
+      
       <BrowserRouter>
         <NavigationBar />
 
-        <div className="relative min-h-screen bg-cover bg-center bg-fixed bg-gray-100" style={{ backgroundImage: `url(/images/backgroundImage.png)` }} >
+        <div className={`transition duration-1000 ease-in-out relative min-h-screen bg-cover bg-center bg-fixed ${theme === 'dark'?'bg-gray-800':'bg-gray-100'}`} style={{ backgroundImage: `url(/images/backgroundImage.png)` }} >
           {/* <div className="absolute inset-0 bg-opacity-20"></div> */}
           <Routes>
             <Route path="/" element={<ProtectedRoute component={Home} user={user} />} />
@@ -60,7 +66,7 @@ function App() {
         <Footer />
       </BrowserRouter>
     </AuthContext.Provider>
-    
+    // </Provider>
   );
 }
 
