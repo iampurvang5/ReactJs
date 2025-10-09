@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HiArrowCircleLeft } from "react-icons/hi";
+import { HiArrowCircleLeft } from "react-icons/hi"; //npm install react-icons
 import { HiArrowCircleRight } from "react-icons/hi";
 
 const PhotoGallery = ({ isDetailPage = false }) => {

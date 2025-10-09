@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { HiChevronLeft } from "react-icons/hi";
+import { HiChevronLeft } from "react-icons/hi"; //npm install react-icons
 import { HiChevronRight } from "react-icons/hi";
 import { HiChevronDoubleRight } from "react-icons/hi";
 import { HiChevronDoubleLeft } from "react-icons/hi";

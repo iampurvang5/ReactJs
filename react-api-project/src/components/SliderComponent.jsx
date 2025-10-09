@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Slider from "react-slick";
+import Slider from "react-slick"; //npm install react-slick slick-carousel 
 
 
 const SliderComponent = ({isDetailPage}) => {

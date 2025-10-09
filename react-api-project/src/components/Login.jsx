@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom"; //npm install react-router-dom
+import Swal from "sweetalert2"; //npm install sweetalert2
 import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {

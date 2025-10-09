@@ -16,7 +16,12 @@ import PhotoGalleryCode from '../components/PhotoGallery.jsx?raw';
 import Dashboard from '../components/Dashboard';
 import DashboardCode from '../components/Dashboard.jsx?raw';
 import { HiArrowCircleLeft } from "react-icons/hi";
-
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Chatbot from '../components/Chatbot';
+import ChatbotCode from '../components/Chatbot.jsx?raw';
+import ClockComponent from '../components/ClockComponent';
+import ClockComponentCode from '../components/ClockComponent.jsx?raw';
 const ComponentDetail = () => {
   const { id } = useParams();
 
@@ -46,8 +51,8 @@ const ComponentDetail = () => {
       component: <Dashboard isDetailPage={true}/>,
       code: DashboardCode
     },
-    { id: 7, title: 'Component 7', description: 'Placeholder for future component', component: null, code: null },
-    { id: 8, title: 'Component 8', description: 'Placeholder for future component', component: null, code: null },
+    { id: 7, title: 'ChatBot', description: 'chatbot component with basic interation', component: <Chatbot isDetailPage={true}/>, code: ChatbotCode },
+    { id: 8, title: 'Clock Component', description: 'A simple digital clock displaying current time', component: <ClockComponent isDetailPage={true}/>, code: ClockComponentCode },
     { id: 9, title: 'Component 9', description: 'Placeholder for future component', component: null, code: null },
   ];
 
@@ -100,7 +105,10 @@ const ComponentDetail = () => {
         <>
           <h2 className="text-2xl font-bold mt-8 mb-4">Source Code</h2>
           <div className="relative bg-gray-800 text-white p-4 rounded-lg overflow-auto max-h-[600px] scrollbar-hide">
-            <pre><code>{selectedComponent.code}</code></pre>
+            {/* <pre><code>{selectedComponent.code}</code></pre> */}
+            <SyntaxHighlighter language="javascript" style={okaidia} customStyle={{ margin: 0, padding: '1rem', backgroundColor: 'transparent' }}>
+              {selectedComponent.code}
+            </SyntaxHighlighter>
             <button
               onClick={handleCopy}
               className="absolute top-2 right-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"

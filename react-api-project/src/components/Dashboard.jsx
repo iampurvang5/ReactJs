@@ -1,5 +1,5 @@
 import React, { useState,useEffect  } from 'react';
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx'; //npm install xlsx
 import {
   PieChart, Pie, Tooltip, ResponsiveContainer, Cell,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend,
@@ -8,16 +8,16 @@ import {
   AreaChart, Area,
   ScatterChart, Scatter, ZAxis,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
-} from 'recharts';
+} from 'recharts'; //npm install recharts
 
 const Dashboard = ({ isDetailPage = false,initialData = [] }) => {
   // Static sample data
   const defaultData = [
-    { category: 'Electronics', sales: 1000, revenue: 2400 },
-    { category: 'Clothing', sales: 800, revenue: 1398 },
-    { category: 'Books', sales: 600, revenue: 9800 },
-    { category: 'Toys', sales: 400, revenue: 3908 },
-    { category: 'Furniture', sales: 200, revenue: 4800 },
+    { category: 'Electronics', sales: 1000, revenue: 1000 },
+    { category: 'Clothing', sales: 800, revenue: 2000 },
+    { category: 'Books', sales: 600, revenue: 3000 },
+    { category: 'Toys', sales: 400, revenue: 4000 },
+    { category: 'Furniture', sales: 200, revenue: 5000 },
   ];
 
   const [data, setData] = useState(initialData.length > 0 ? initialData : defaultData);
@@ -230,7 +230,7 @@ const Dashboard = ({ isDetailPage = false,initialData = [] }) => {
   const renderAllCharts = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {chartOptions.slice(1).map((chartType) => (
-        <div key={chartType} className="bg-white p-4 rounded-lg shadow-md">
+        <div key={chartType} className="bg-white p-4 rounded-lg shadow-md ">
           <h3 className="text-lg font-semibold mb-2">{chartType}</h3>
           {renderChart(chartType)}
         </div>
@@ -239,7 +239,7 @@ const Dashboard = ({ isDetailPage = false,initialData = [] }) => {
   );
 
   return (
-    <div className={`w-full ${isDetailPage ? 'p-6 min-h-[600px] bg-gray-100 rounded-lg' : 'p-2 h-48 overflow-auto bg-gray-100 rounded scrollbar-hide'}`}>
+    <div className={`w-full ${isDetailPage ? 'p-6 min-h-[600px] bg-gray-50 rounded-lg' : 'p-2 h-48 overflow-auto bg-gray-100 rounded scrollbar-hide'}`}>
       {/* <h2 className="text-2xl font-bold mb-6 text-gray-800">Dashboard</h2> */}
       {!isDetailPage && renderPieChart()} {/* Show compact Pie Chart in card view */}
       {isDetailPage && (

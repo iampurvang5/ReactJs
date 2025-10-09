@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext  } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; //npm install react-router-dom
 import CrudForm from "./CrudForm";
-import Swal from "sweetalert2/dist/sweetalert2.js";
+import Swal from "sweetalert2/dist/sweetalert2.js"; //npm install sweetalert2
 import "sweetalert2/src/sweetalert2.scss";
 import { AuthContext } from "../context/AuthContext";
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import Swal from 'sweetalert2/dist/sweetalert2.js'; //npm install sweetalert2
 import 'sweetalert2/src/sweetalert2.scss';
 
 export default function BlogPosts({ userId,user,refreshKey }) {

@@ -1,0 +1,18 @@
+{
+  "greetings": {
+    "hello": "Hi there! Nice to meet you!",
+    "hi": "Hello! How can I assist you today?",
+    "good afternoon": "Good afternoon! How can I help you?"
+  },
+  "questions": {
+    "what is the time": "The current time is 02:53 PM IST on Tuesday, October 07, 2025.",
+    "what is your name": "I'm chatbot, Created by Purvang!",
+    "your name": "I'm chatbot, Created by Purvang!",
+    "how are you": "I'm doing great, thanks! How about you?"
+  },
+  "thanks": {
+    "thank you": "You're welcome! Anything else I can do?",
+    "thanks": "My pleasure! Let me know if you need more help."
+  },
+  "default": "Sorry, I didn't understand that. Try asking about the time, saying hi, or thanking me!"
+}

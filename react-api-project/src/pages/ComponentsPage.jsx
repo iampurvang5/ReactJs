@@ -7,6 +7,8 @@ import ProgressBar from '../components/ProgressBar';
 import SidebarComponent from '../components/SidebarComponent';
 import PhotoGallery from '../components/PhotoGallery';
 import Dashboard from '../components/Dashboard';
+import Chatbot from '../components/Chatbot';
+import ClockComponent from '../components/ClockComponent';
 
 const ComponentsPage = () => {
   // Placeholder data for cards; you can add more or modify later
@@ -49,15 +51,15 @@ const ComponentsPage = () => {
     },
     {
       id: 7,
-      title: "Component 7",
-      description: "Placeholder for future component",
-      component: null,
+      title: "Chatbot",
+      description: "chatbot component with basic interaction",
+      component: <Chatbot/>,
     },
     {
       id: 8,
-      title: "Component 8",
-      description: "Placeholder for future component",
-      component: null,
+      title: "Clock Component",
+      description: "A simple digital clock displaying current time",
+      component: <ClockComponent/>,
     },
     {
       id: 9,
