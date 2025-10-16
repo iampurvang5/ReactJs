@@ -84,6 +84,7 @@ const Dashboard = ({ isDetailPage = false,initialData = [] }) => {
 		<Pie
 			data={data}
 			dataKey={dataKey}
+
 			nameKey={nameKey}
 			cx="50%"
 			cy="50%"
@@ -263,10 +264,7 @@ const Dashboard = ({ isDetailPage = false,initialData = [] }) => {
 				</thead>
 				<tbody>
 				{data.map((row, index) => (
-					<tr
-					key={index}
-					className={` transition duration-1000 ease-in-out ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-900' : 'bg-white hover:bg-gray-50'}`}
-					>
+					<tr key={index} className={` transition duration-1000 ease-in-out ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-900' : 'bg-white hover:bg-gray-50'}`} >
 					{Object.values(row).map((value, i) => (
 						<td key={i} className="p-3 border-b border-gray-200">
 						{typeof value === 'number' ? value.toLocaleString() : value}
@@ -279,25 +277,16 @@ const Dashboard = ({ isDetailPage = false,initialData = [] }) => {
 			</div>
 			<div className="mb-6 flex items-center gap-4">
 			<label className={`font-medium ${theme === 'dark' ? 'text-gray-100':'text-gray-700'}`}>Select Chart:</label>
-			<select
-				value={selectedChart}
-				onChange={(e) => setSelectedChart(e.target.value)}
-				className="border-2 border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-			>
-				{chartOptions.map((option) => (
-				<option key={option} value={option} className={`${theme === 'dark' ? 'text-gray-800':'text-gray-100'}`}>
-					{option}
-				</option>
-				))}
-
+			<select value={selectedChart} onChange={(e) => setSelectedChart(e.target.value)} className="border-2 border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+			{chartOptions.map((option) => (
+			<option key={option} value={option} className={`${theme === 'dark' ? 'text-gray-800':'text-gray-100'}`}>
+				{option}
+			</option>
+			))}
 
 			</select>
 			<label className={`font-medium ${theme === 'dark' ? 'text-gray-100':'text-gray-700'}`}>Category Column:</label>
-			<select
-				value={nameKey}
-				onChange={(e) => setNameKey(e.target.value)}
-				className="border-2 border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-			>
+			<select value={nameKey} onChange={(e) => setNameKey(e.target.value)} className="border-2 border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" >
 				{columns.map((col) => typeof data[0][col] !== 'number'? (
 				<option key={col} value={col} className={`${theme === 'dark' ? 'text-gray-800':'text-gray-100'}`}>
 					{col}
@@ -305,11 +294,7 @@ const Dashboard = ({ isDetailPage = false,initialData = [] }) => {
 				):null)}
 			</select>
 			<label className="text-gray-700 font-medium">Value Column:</label>
-			<select
-				value={dataKey}
-				onChange={(e) => setDataKey(e.target.value)}
-				className="border-2 border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-			>
+			<select value={dataKey} onChange={(e) => setDataKey(e.target.value)} className="border-2 border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
 				{columns.map((col) => typeof data[0][col] === 'number'? (
 				<option key={col} value={col} className={`${theme === 'dark' ? 'text-gray-800':'text-gray-100'}`}>
 					{col}

@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* PrimeReact DataTable customizations */
+/* .p-datatable {
+  @apply rounded-lg shadow-sm;
+}
+
+.p-datatable .p-datatable-header {
+  @apply bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white font-semibold border-b border-gray-200 dark:border-gray-700 py-3 px-4;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  @apply hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  @apply border-b border-gray-200 dark:border-gray-700 py-3 px-4;
+}
+
+.p-datatable .p-paginator {
+  @apply bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-2 px-4 flex justify-between items-center;
+}
+
+.p-datatable .p-paginator .p-paginator-pages .p-paginator-page {
+  @apply mx-1 px-3 py-1 rounded-lg text-sm;
+}
+
+.p-datatable .p-paginator .p-paginator-page.p-highlight {
+  @apply bg-blue-500 text-white;
+}
+
+.p-datatable .p-sortable-column .p-column-header-content {
+  @apply flex items-center gap-2;
+}
+
+.p-datatable .p-sortable-column .p-sortable-column-icon {
+  @apply text-gray-500 dark:text-gray-300;
+}
+
+.p-inputtext {
+  @apply w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white border-gray-300 dark:border-gray-600;
+} */

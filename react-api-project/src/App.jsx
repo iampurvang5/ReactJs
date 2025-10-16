@@ -14,7 +14,10 @@ import BlogPostPage from "./pages/BlogPostPage";
 import ComponentsPage from "./pages/ComponentsPage";
 import ComponentDetail from "./pages/ComponentDetail";
 import { AuthContext } from "./context/AuthContext";
-
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; // Default theme
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+// import './styles/global.css';
 function App() {
   // const [user, setUser] = useState({
   //   name: "John Doe",
@@ -53,6 +56,7 @@ function App() {
         <NavigationBar />
 
         <div className={`transition duration-1000 ease-in-out relative min-h-screen bg-cover bg-center bg-fixed ${theme === 'dark'?'bg-gray-800':'bg-gray-100'}`} style={{ backgroundImage: `url(/images/backgroundImage.png)` }} >
+          
           {/* <div className="absolute inset-0 bg-opacity-20"></div> */}
           <Routes>
             <Route path="/" element={<ProtectedRoute component={Home} user={user} />} />

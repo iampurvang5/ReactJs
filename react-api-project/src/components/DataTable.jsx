@@ -141,21 +141,12 @@ const DataTable = ({ isDetailPage = false }) => {
 		<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
 			<h2 className={`text-2xl font-bold mb-4 md:mb-0 ${theme === 'dark' ? 'text-gray-100':'text-gray-800'}`}>Employee Data Table</h2>
 			<div className="relative">
-			<input
-				type="text"
-				placeholder="Search..."
-				value={searchTerm}
-				onChange={(e) => setSearchTerm(e.target.value)}
-				className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-64"
-			/>
+			<input type="text" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-64" />
 			<svg className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 			</svg>
 			</div>
-			<button
-			onClick={downloadExcel}
-			className="mt-4 md:mt-0 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2"
-			>
+			<button onClick={downloadExcel} className="mt-4 md:mt-0 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2" >
 			<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 			</svg>
@@ -171,24 +162,11 @@ const DataTable = ({ isDetailPage = false }) => {
 			<thead className={`bg-gray-50 ${theme==='dark'?'bg-gray-700 text-gray-100':'bg-blue-100 text-gray-700'}`}>
 			<tr>
 				{columns.map((column) => (
-				<th
-					key={column.key}
-					onClick={() => isDetailPage && handleSort(column)} // Disable sorting in card view
-					className={`px-3 py-2 text-left text-xs font-medium uppercase tracking-wider ${
-					isDetailPage && column.sortable ? 'cursor-pointer' : 'cursor-default'
-					} ${isDetailPage ? '' : 'text-[10px]'}`}
-				>
+				<th key={column.key} onClick={() => isDetailPage && handleSort(column)}  className={`px-3 py-2 text-left text-xs font-medium uppercase tracking-wider ${ isDetailPage && column.sortable ? 'cursor-pointer' : 'cursor-default' } ${isDetailPage ? '' : 'text-[10px]'}`} >
 					<div className="flex items-center space-x-1">
 					<span>{column.label}</span>
 					{isDetailPage && sortConfig.key === column.key && (
-						<svg
-						className={`w-3 h-3 ${
-							sortConfig.direction === 'asc' ? 'text-green-500' : 'text-red-500'
-						}`}
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						>
+						<svg className={`w-3 h-3 ${ sortConfig.direction === 'asc' ? 'text-green-500' : 'text-red-500' }`} fill="none" stroke="currentColor" viewBox="0 0 24 24" >
 						{sortConfig.direction === 'asc' ? (
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
 						) : (
@@ -206,10 +184,7 @@ const DataTable = ({ isDetailPage = false }) => {
 				currentData.map((row) => (
 				<tr key={row.id} className={`${theme==='dark'?'hover:bg-gray-900':'hover:bg-gray-50'}`}>
 					{columns.map((column) => (
-					<td
-						key={column.key}
-						className={`px-3 py-2 whitespace-nowrap text-sm ${theme==='dark'?'text-gray-100':'text-gray-900'} ${isDetailPage ? '' : 'text-[10px]'}`}
-					>
+					<td key={column.key} className={`px-3 py-2 whitespace-nowrap text-sm ${theme==='dark'?'text-gray-100':'text-gray-900'} ${isDetailPage ? '' : 'text-[10px]'}`} >
 						{column.formatter ? column.formatter(row[column.key]) : row[column.key]}
 					</td>
 					))}
@@ -233,48 +208,23 @@ const DataTable = ({ isDetailPage = false }) => {
 			Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, sortedData.length)} of {sortedData.length} results
 			</div>
 			<div className="flex items-center space-x-2">
-			<button
-				onClick={() => handlePageChange(1)}
-				disabled={currentPage === 1}
-				className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
-			>
+			<button onClick={() => handlePageChange(1)} disabled={currentPage === 1} className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors">
 				<HiChevronDoubleLeft />
 			</button>
-			<button
-				onClick={() => handlePageChange(currentPage - 1)}
-				disabled={currentPage === 1}
-				className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
-			>
+			<button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors">
 				<HiChevronLeft />
-
 			</button>
 			<div className="flex space-x-1">
 				{getPageNumbers().map((page) => (
-				<button
-					key={page}
-					onClick={() => handlePageChange(page)}
-					className={`px-3 py-2 border border-gray-300 rounded-lg text-sm ${
-					currentPage === page
-						? 'bg-blue-500 text-white'
-						: 'hover:bg-gray-50 transition-colors'
-					}`}
-				>
+				<button key={page} onClick={() => handlePageChange(page)} className={`px-3 py-2 border border-gray-300 rounded-lg text-sm ${ currentPage === page ? 'bg-blue-500 text-white' : 'hover:bg-gray-50 transition-colors'}`}>
 					{page}
 				</button>
 				))}
 			</div>
-			<button
-				onClick={() => handlePageChange(currentPage + 1)}
-				disabled={currentPage === totalPages}
-				className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
-			>
+			<button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors" >
 				<HiChevronRight />
 			</button>
-			<button
-				onClick={() => handlePageChange(totalPages)}
-				disabled={currentPage === totalPages}
-				className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
-			>
+			<button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors" >
 				<HiChevronDoubleRight />
 			</button>
 			</div>

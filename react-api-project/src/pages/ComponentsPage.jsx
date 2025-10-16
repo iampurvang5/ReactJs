@@ -12,6 +12,8 @@ import ClockComponent from '../components/ClockComponent';
 import { useSelector } from 'react-redux';
 import { HiChevronLeft } from "react-icons/hi"; //npm install react-icons
 import { HiChevronRight } from "react-icons/hi";
+import CalendarComponent from '../components/CalendarComponent';
+import DynamicDatatable from '../components/DynamicDatatable';
 const ComponentsPage = () => {
   const theme = useSelector((state) => state.theme.mode);
   // Placeholder data for cards; you can add more or modify later
@@ -66,9 +68,9 @@ const ComponentsPage = () => {
     },
     {
       id: 9,
-      title: "Component 9",
-      description: "Placeholder for future component",
-      component: null,
+      title: "Dynamic DataTable",
+      description: "Dynamic Datatable component using primereact library",
+      component: <DynamicDatatable/>,
     },
     {
       id: 10,

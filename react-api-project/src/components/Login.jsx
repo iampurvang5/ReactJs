@@ -124,72 +124,68 @@ export default function Login() {
 	};
 
 	return (
-	// <div className="relative min-h-screen bg-cover bg-center bg-fixed bg-gray-100" style={{ backgroundImage: `url(/images/backgroundImage.png)` }} >
-	//   {/* Overlay for readability */}
-	//   <div className="absolute inset-0 bg-opacity-20"></div>
-		<div className="flex items-center justify-center p-8">
-		<div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-			<h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-			Login
-			</h2>
-			<form onSubmit={handleSubmit} className="space-y-6">
-			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
-				Email or Username
-				</label>
-				<input
-				type="text"
-				name="emailOrUsername"
-				required
-				value={formData.emailOrUsername}
-				onChange={handleChange}
-				className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-colors placeholder-gray-400 ${
-					errors.emailOrUsername ? "border-red-500" : "border-gray-300"
-				}`}
-				placeholder="Enter your email"
-				/>
-				{errors.emailOrUsername && (
-				<p className="mt-1 text-sm text-red-600">{errors.emailOrUsername}</p>
-				)}
-			</div>
-			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
-				Password
-				</label>
-				<input
-				type="password"
-				name="password"
-				required
-				value={formData.password}
-				onChange={handleChange}
-				className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-colors placeholder-gray-400 ${
-					errors.password ? "border-red-500" : "border-gray-300"
-				}`}
-				placeholder="Enter your password"
-				/>
-				{errors.password && (
-				<p className="mt-1 text-sm text-red-600">{errors.password}</p>
-				)}
-			</div>
-			<div className="flex justify-end gap-4">
-				<button
-				type="button"
-				onClick={handleCancel}
-				className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-				>
-				Cancel
-				</button>
-				<button
-				type="submit"
-				className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-				disabled={Object.values(errors).some((err) => err)}
-				>
-				Sign In
-				</button>
-			</div>
-			</form>
+	<div className="flex items-center justify-center p-8">
+	<div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+		<h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+		Login
+		</h2>
+		<form onSubmit={handleSubmit} className="space-y-6">
+		<div>
+			<label className="block text-sm font-medium text-gray-700 mb-1">
+			Email or Username
+			</label>
+			<input
+			type="text"
+			name="emailOrUsername"
+			required
+			value={formData.emailOrUsername}
+			onChange={handleChange}
+			className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-colors placeholder-gray-400 ${
+				errors.emailOrUsername ? "border-red-500" : "border-gray-300"
+			}`}
+			placeholder="Enter your email"
+			/>
+			{errors.emailOrUsername && (
+			<p className="mt-1 text-sm text-red-600">{errors.emailOrUsername}</p>
+			)}
 		</div>
+		<div>
+			<label className="block text-sm font-medium text-gray-700 mb-1">
+			Password
+			</label>
+			<input
+			type="password"
+			name="password"
+			required
+			value={formData.password}
+			onChange={handleChange}
+			className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-colors placeholder-gray-400 ${
+				errors.password ? "border-red-500" : "border-gray-300"
+			}`}
+			placeholder="Enter your password"
+			/>
+			{errors.password && (
+			<p className="mt-1 text-sm text-red-600">{errors.password}</p>
+			)}
 		</div>
-	// </div>
+		<div className="flex justify-end gap-4">
+			<button
+			type="button"
+			onClick={handleCancel}
+			className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+			>
+			Cancel
+			</button>
+			<button
+			type="submit"
+			className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+			disabled={Object.values(errors).some((err) => err)}
+			>
+			Sign In
+			</button>
+		</div>
+		</form>
+	</div>
+	</div>
 	);
 }

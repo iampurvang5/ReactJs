@@ -23,7 +23,8 @@ import ChatbotCode from '../components/Chatbot.jsx?raw';
 import ClockComponent from '../components/ClockComponent';
 import ClockComponentCode from '../components/ClockComponent.jsx?raw';
 import { useSelector } from 'react-redux';
-
+import DynamicDatatable from '../components/DynamicDatatable';
+import DynamicDatatableCode from '../components/DynamicDatatable.jsx?raw';
 const ComponentDetail = () => {
 	const { id } = useParams();
 	const theme = useSelector((state) => state.theme.mode);
@@ -56,7 +57,10 @@ const ComponentDetail = () => {
 	},
 	{ id: 7, title: 'ChatBot', description: 'chatbot component with basic interation', component: <Chatbot isDetailPage={true}/>, code: ChatbotCode },
 	{ id: 8, title: 'Clock Component', description: 'A simple digital clock displaying current time', component: <ClockComponent isDetailPage={true}/>, code: ClockComponentCode },
-	{ id: 9, title: 'Component 9', description: 'Placeholder for future component', component: null, code: null },
+	{ id: 9,
+      title: "Dynamic DataTable",
+      description: "Dynamic Datatable component using primereact library",
+      component: <DynamicDatatable isDetailPage={true}/>, code: DynamicDatatableCode },
 	];
 
 	// Find the selected component
@@ -91,7 +95,7 @@ const ComponentDetail = () => {
 	return (
 	<div className="container mx-auto px-4 py-8">
 		<Link to="/components" className="mt-6 inline-block text-blue-500 hover:underline text-2xl">
-			<HiArrowCircleLeft />
+			<HiArrowCircleLeft size={30} />
 		</Link>
 		<h1 className={`text-3xl font-bold mb-4 ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>{selectedComponent.title}</h1>
 		<p className={`text-lg mb-6 ${theme==='dark'?'text-gray-100':'text-gray-600'}`}>{selectedComponent.description}</p>
@@ -121,7 +125,7 @@ const ComponentDetail = () => {
 			</div>
 		</>
 		) : (
-		<p className="mt-8 text-lg text-gray-600 ">No source code available for this component yet.</p>
+		<p className={`mt-8 text-lg ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>No source code available for this component yet.</p>
 		)}
 		
 	</div>
