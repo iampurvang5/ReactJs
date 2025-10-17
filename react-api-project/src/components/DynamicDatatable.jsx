@@ -14,10 +14,7 @@ import * as XLSX from 'xlsx'; //npm install xlsx
 const DynamicDatatable = ({ isDetailPage = false }) => {
 	const theme = useSelector((state) => state.theme.mode);
 	const dt = useRef(null);
-	const [productDialog, setProductDialog] = useState(false);
-    const [deleteProductDialog, setDeleteProductDialog] = useState(false);
-    const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
-	const [product, setProduct] = useState(null);
+
 	const [selectedProducts, setSelectedProducts] = useState([]);
 	useEffect(() => {
     console.log('Theme changed to:', theme);
@@ -40,7 +37,6 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
 	});
 	const [globalFilterValue, setGlobalFilterValue] = useState('');
 
-
 	const [columns,setColumns] = useState([
 		{ field: 'code', header: 'Code', sortable: true, className:theme === 'dark' ? 'text-white' : 'text-gray-800' },
 		{ field: 'name', header: 'Name', sortable: true, className:theme === 'dark' ? 'text-white' : 'text-gray-800' },
@@ -54,13 +50,13 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
 	};
 
 	const initFilters = () => {
-		setFilters({
-			global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-			code: { value: null, matchMode: FilterMatchMode.CONTAINS },
-			name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]},
-			category: { value: null, matchMode: FilterMatchMode.CONTAINS },
-			quantity: { value: null, matchMode: FilterMatchMode.EQUALS },
-		});
+		const newFilters = {
+          global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        };
+        columns.forEach((header) => {
+          newFilters[header.field] = { value: null, matchMode: FilterMatchMode.CONTAINS };
+        });
+        setFilters(newFilters);
 		setGlobalFilterValue('');
 	};
 
@@ -70,6 +66,7 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
 		_filters['global'].value = value;
 		setFilters(_filters);
 		setGlobalFilterValue(value);
+		console.log('filters:',filters);
 	};
 
 	const handleExcelUpload = (e) => {
@@ -144,7 +141,7 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
           newFilters[header] = { value: null, matchMode: FilterMatchMode.CONTAINS };
         });
         setFilters(newFilters);
-
+		console.log("updatedFilters:",filters);
         Swal.fire({
           title: 'Success!',
           text: 'Excel data loaded successfully.',
@@ -250,6 +247,7 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
     const { value: newProduct } = await Swal.fire({
       title: 'New Record',
       theme: theme === 'dark' ? 'dark' : 'light',
+	  width: '1040px',
       confirmButtonText: 'Save',
       html: `
         <div style="text-align: left; margin-bottom: 10px;">
@@ -259,7 +257,7 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
               const inputType = col.field === 'quantity' ? 'number' : 'text';
               const value = isCode ? productCode : '';
               return `
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <div style="flex: 1 1 45%;  display: flex; align-items: center; margin-bottom: 10px;">
                   <label for="swal-input${index}" class="swal2-label" style="width: 120px; font-weight: 500;">${col.header}</label>
                   <input
                     id="swal-input${index}"
@@ -308,33 +306,46 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
 	const { value: updatedProduct } = await Swal.fire({
 		title: 'Edit Record',
 		theme: theme === 'dark' ? 'dark' : 'light',
+		width: '1040px',
 		confirmButtonText: 'Save',
 		html: `
-		<div style="text-align: left; margin-bottom: 10px;">
-			${columns
-			.map((col, index) => {
-				const isCode = col.field === 'code';
-				const inputType = col.field === 'quantity' ? 'number' : 'text';
-				const value = product[col.field] !== undefined ? product[col.field] : '';
-				return `
-				<div style="display: flex; align-items: center; margin-bottom: 10px;">
-					<label for="swal-input${index}" class="swal2-label" style="width: 120px; font-weight: 500;">${col.header}</label>
-					<input
-					id="swal-input${index}"
-					type="${inputType}"
-					class="swal2-input${isCode ? ' bg-gray-300' : ''}"
-					value="${value}"
-					style="flex: 1; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
-					${isCode ? 'disabled' : 'required'}
-					>
-				</div>
-				`;
-			})
-			.join('')}
-		</div>
+		<div style="text-align: left; margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 20px;">
+          ${columns
+            .map((col, index) => ({
+              html: `
+                <div style="flex: 1 1 45%; display: flex; align-items: center; margin-bottom: 10px;">
+                  <label for="swal-input${index}" class="swal2-label" style="width: 120px; font-weight: 500;">${col.header}</label>
+                  <input
+                    id="swal-input${index}"
+                    type="${col.field === 'quantity' ? 'number' : 'text'}"
+                    class="swal2-input${col.field === 'code' ? ' bg-gray-300' : ''}"
+                    value="${product[col.field] !== undefined ? product[col.field] : ''}"
+                    style="flex: 1; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+                    ${col.field === 'code' ? 'disabled' : 'required'}
+                  >
+                </div>
+              `,
+              index,
+            }))
+            .reduce((acc, curr, i, arr) => {
+              if (i % 2 === 0) {
+                const next = arr[i + 1];
+                acc.push(`
+                  <div style="display: flex; gap: 20px; margin-bottom: 10px;">
+                    ${curr.html}
+                    ${next ? next.html : '<div style="flex: 1 1 45%;"></div>'}
+                  </div>
+                `);
+              }
+              return acc;
+            }, [])
+            .join('')}
+        </div>
 		`,
 		focusConfirm: false,
 		preConfirm: () => {
+
+
 		const result = { id: product.id };
 		let isValid = true;
 		columns.forEach((col, index) => {
@@ -370,7 +381,7 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
 		icon: 'warning',
 		showCancelButton: true,
 		theme: theme === 'dark' ? 'dark' : 'light',
-		confirmButtonColor: '#3085d6',
+		confirmButtonColor: '#16A34A',
 		cancelButtonColor: '#d33',
 		confirmButtonText: 'Yes, delete it!',
 	}).then((result) => {
@@ -404,6 +415,10 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
 			value={products}
 			showGridlines 
 			ref={dt}
+			size='small'
+			scrollable 
+			stripedRows 
+			scrollHeight="600px" 
 			paginator={isDetailPage}
 			rows={isDetailPage ? 5 : 2}
 			selectionMode="checkbox"
@@ -412,13 +427,13 @@ const DynamicDatatable = ({ isDetailPage = false }) => {
 			paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown CurrentPageReport"
 			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 			rowsPerPageOptions={isDetailPage ? [5, 10, 25, 50] : []}
-			globalFilterFields={['code', 'name', 'category', 'quantity']}
+			globalFilterFields={columns.map((col) => col.field)}
 			filters={filters}
 			onFilter={(e) => setFilters(e.filters)}
 			resizableColumns 
 			// header={isDetailPage &&(renderHeader())}
 			// headerClassName={theme === 'dark' ? 'bg-gray-900 !text-white' : 'text-gray-900 bg-white'}
-			className={`min-w-full ${isDetailPage ? '' : 'text-xs'} ${theme === 'dark' ? 'text-white !bg-transparent !border-none' : 'text-gray-800'}`}
+			className={`min-w-full ${isDetailPage ? '' : 'text-xs'} ${theme === 'dark' ? 'text-white !bg-transparent !border-none' : 'text-gray-800'} scrollbar-hide`}
 			tableStyle={{ fontSize: isDetailPage ? '14px' : '12px',border:'none',backgroundColor:theme==='dark'?'#1E293B':'white' }}
 			paginatorClassName={isDetailPage ? theme==='dark'?'!bg-gray-800 !text-white !border-gray-900':'' : 'text-xs'}
 			emptyMessage="No products found."

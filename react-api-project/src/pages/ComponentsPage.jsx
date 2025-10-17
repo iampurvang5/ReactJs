@@ -14,6 +14,8 @@ import { HiChevronLeft } from "react-icons/hi"; //npm install react-icons
 import { HiChevronRight } from "react-icons/hi";
 import CalendarComponent from '../components/CalendarComponent';
 import DynamicDatatable from '../components/DynamicDatatable';
+import LibrariesUsed from '../components/LibrariesUsed';
+import ReduxImplementation from '../components/ReduxImplementation';
 const ComponentsPage = () => {
   const theme = useSelector((state) => state.theme.mode);
   // Placeholder data for cards; you can add more or modify later
@@ -114,7 +116,7 @@ const ComponentsPage = () => {
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayedCards.map((card) => (
-          <Link to={`/components/${card.id}`} key={card.id} className={`${theme==='dark'?'bg-gray-700 border border-gray-600 hover:bg-gray-900':'bg-white border border-gray-200 hover:bg-gray-50'} rounded-lg shadow-md p-6 hover:shadow-lg transition duration-1000 ease-in-out`}>
+          <Link to={`/components/${card.id}`} key={card.id} className={`${theme==='dark'?'bg-gray-700 border border-gray-600 hover:bg-gray-900':'bg-white border border-gray-200 hover:bg-gray-50'} rounded-lg shadow-md p-6 hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out`}>
             <h2 className={`text-xl font-semibold mb-2 ${theme==='dark'?'text-gray-100':'text-gray-800'}`}>{card.title}</h2>
             <p className={`mb-4 ${theme==='dark'?'text-gray-100':'text-gray-600'}`}>{card.description}</p>
             {card.component ? (
@@ -149,6 +151,10 @@ const ComponentsPage = () => {
           </button>
         </div>
       )}
+
+      <LibrariesUsed theme={theme} />
+
+      <ReduxImplementation theme={theme}/>
     </div>
   );
 };
